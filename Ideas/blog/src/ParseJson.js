@@ -22,13 +22,13 @@ constructor(props) {
 }
 
 componentDidMount() {
-  return fetch('https://facebook.github.io/react-native/movies.json')
+  return fetch('http://192.168.1.100:8080/users')
     .then((response) => response.json())
     .then((responseJson) => {
       let ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
       this.setState({
         isLoading: false,
-        dataSource: ds.cloneWithRows(responseJson.movies),
+        dataSource: ds.cloneWithRows(responseJson.message),
       }, function() {
         // do something with new state
       });
@@ -51,7 +51,7 @@ render() {
     <View style={{flex: 1, paddingTop: 20}}>
       <ListView
         dataSource={this.state.dataSource}
-        renderRow={(rowData) => <Text>{rowData.title}, {rowData.releaseYear}</Text>}
+        renderRow={(rowData) => <Text>{rowData.userEmail}, {rowData.userPassword}</Text>}
       />
     </View>
   );
